@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Panel Privado</title>
+  <style>
+    body { font-family: Arial; padding: 50px; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <h1>Panel privado de asesores</h1>
+  <p>Información de los terrenos:</p>
+  <ul>
+    <li><a href="https://tusitio.com/terreno1.pdf" target="_blank">Terreno 1</a></li>
+    <li><a href="https://tusitio.com/terreno2.pdf" target="_blank">Terreno 2</a></li>
+  </ul>
+
+  <button onclick="logout()">Cerrar sesión</button>
+
+  <script>
+    if (localStorage.getItem("acceso") !== "ok") {
+      window.location.href = "login.html";
+    }
+
+    function logout() {
+      localStorage.removeItem("acceso");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

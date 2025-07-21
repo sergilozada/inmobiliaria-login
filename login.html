@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login de Asesores</title>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 100px; }
+    input { margin: 10px; padding: 10px; width: 250px; }
+    button { padding: 10px 20px; }
+  </style>
+</head>
+<body>
+
+  <h2>Ingreso de Asesores</h2>
+  <input type="text" id="email" placeholder="Correo"><br>
+  <input type="password" id="password" placeholder="Contraseña"><br>
+  <button onclick="login()">Ingresar</button>
+  <p id="mensaje" style="color:red;"></p>
+
+  <script>
+    // 🔧 CONFIGURA TU FIREBASE AQUÍ
+    const firebaseConfig = {
+      apiKey: "TU_API_KEY",
+      authDomain: "TU_PROJECT_ID.firebaseapp.com",
+      databaseURL: "https://inmobiliariaaccesos-default-rtdb.firebaseio.com/",
+      projectId: "TU_PROJECT_ID",
+      storageBucket: "TU_PROJECT_ID.appspot.com",
+      messagingSenderId: "TU_SENDER_ID",
+      appId: "TU_APP_ID"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    function convertirCorreo(correo) {
+      return correo.replace(/[@.]/g, "_");
+    }
+
+    function login() {
+      const email = document.getElementById("email").value.trim();
+      const pass = document.getElementById("password").value.trim();
+      const correoFormato = convertirCorreo(email);
+
+      db.ref("usuarios/" + correoFormato).once("value", (snapshot) => {
+        if (!snapshot.exists()) {
+          document.getElementById("mensaje").innerText = "Usuario no registrado.";
+          return;
+        }
+
+        const datos = snapshot.val();
+        if (datos.password === pass) {
+          localStorage.setItem("acceso", "ok");
+          window.location.href = "dashboard.html";
+        } else {
+          document.getElementById("mensaje").innerText = "Contraseña incorrecta.";
+        }
+      });
+    }
+  </script>
+</body>
+</html>
