@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Login de Asesores</title>
+  <!-- Firebase SDK versión clásica compatible con HTML directo -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
   <style>
@@ -19,24 +20,28 @@
   <p id="mensaje" style="color:red;"></p>
 
   <script>
-    // 🔧 CONFIGURA TU FIREBASE AQUÍ
+    // ✅ Configuración real de Firebase
     const firebaseConfig = {
-      apiKey: "TU_API_KEY",
-      authDomain: "TU_PROJECT_ID.firebaseapp.com",
-      databaseURL: "https://inmobiliariaaccesos-default-rtdb.firebaseio.com/",
-      projectId: "TU_PROJECT_ID",
-      storageBucket: "TU_PROJECT_ID.appspot.com",
-      messagingSenderId: "TU_SENDER_ID",
-      appId: "TU_APP_ID"
+      apiKey: "AIzaSyCxtdDswO9Ua7raxrKDOuFHt0_l2aILofQ",
+      authDomain: "inmobiliariaaccesos.firebaseapp.com",
+      databaseURL: "https://inmobiliariaaccesos-default-rtdb.firebaseio.com",
+      projectId: "inmobiliariaaccesos",
+      storageBucket: "inmobiliariaaccesos.appspot.com",
+      messagingSenderId: "982195590492",
+      appId: "1:982195590492:web:9320cb8d812951ddb45d99",
+      measurementId: "G-8C9ESL0Z3T"
     };
 
+    // ✅ Inicializa Firebase
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
+    // 🔁 Convierte correos como asesor1@gmail.com → asesor1_gmail_com
     function convertirCorreo(correo) {
       return correo.replace(/[@.]/g, "_");
     }
 
+    // 🚪 Lógica de ingreso
     function login() {
       const email = document.getElementById("email").value.trim();
       const pass = document.getElementById("password").value.trim();
