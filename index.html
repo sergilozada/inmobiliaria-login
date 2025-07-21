@@ -1,26 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
   <title>Login de Asesores</title>
-  <!-- Firebase SDK versión clásica compatible con HTML directo -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Firebase SDK (compatibilidad clásica) -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; margin-top: 100px; }
-    input { margin: 10px; padding: 10px; width: 250px; }
-    button { padding: 10px 20px; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #2980b9, #6dd5fa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background-color: white;
+      padding: 40px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .login-container h1 {
+      margin-bottom: 25px;
+      color: #2c3e50;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      text-align: center; /* Texto centrado al escribir */
+    }
+
+    input::placeholder {
+      text-align: center; /* Placeholder centrado */
+    }
+
+    .login-container button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .login-container button:hover {
+      background-color: #2980b9;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
 
-  <h2>Ingreso de Asesores</h2>
-  <input type="text" id="email" placeholder="Correo"><br>
-  <input type="password" id="password" placeholder="Contraseña"><br>
-  <button onclick="login()">Ingresar</button>
-  <p id="mensaje" style="color:red;"></p>
+  <div class="login-container">
+    <h1>Iniciar Sesión</h1>
+    <input type="text" id="email" placeholder="Correo electrónico">
+    <input type="password" id="password" placeholder="Contraseña">
+    <button onclick="login()">Ingresar</button>
+    <p class="error" id="mensaje"></p>
+  </div>
 
   <script>
-    // ✅ Configuración real de Firebase
+    // Configuración de Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyCxtdDswO9Ua7raxrKDOuFHt0_l2aILofQ",
       authDomain: "inmobiliariaaccesos.firebaseapp.com",
@@ -32,16 +92,13 @@
       measurementId: "G-8C9ESL0Z3T"
     };
 
-    // ✅ Inicializa Firebase
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    // 🔁 Convierte correos como asesor1@gmail.com → asesor1_gmail_com
     function convertirCorreo(correo) {
       return correo.replace(/[@.]/g, "_");
     }
 
-    // 🚪 Lógica de ingreso
     function login() {
       const email = document.getElementById("email").value.trim();
       const pass = document.getElementById("password").value.trim();
@@ -63,5 +120,6 @@
       });
     }
   </script>
+
 </body>
 </html>
