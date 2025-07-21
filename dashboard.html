@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8" />
   <title>Panel Privado - Asesores</title>
   <style>
     body {
@@ -48,21 +49,21 @@
   <div class="terrenos">
     <a href="https://tusitio.com/lotes-playa.pdf" target="_blank">📄 Terrenos - Zona Playa</a>
     <a href="https://tusitio.com/lotes-campo.pdf" target="_blank">📄 Terrenos - Zona Campo</a>
-    <a href="https://wa.me/51980253587?text=Hola%20quiero%20más%20info%20de%20los%20lotes" target="_blank">📲 Contactar por WhatsApp</a>
+    <a href="https://wa.me/51987654321?text=Hola%20quiero%20más%20info%20de%20los%20lotes" target="_blank">📲 Contactar por WhatsApp</a>
   </div>
 
   <button onclick="logout()">Cerrar sesión</button>
 
   <script>
-    // Validación: si no ha iniciado sesión, redirigir
+    // 🔒 Protección: Solo deja pasar si está logueado
     if (localStorage.getItem("acceso") !== "ok") {
-      window.location.href = "https://sergilozada.github.io/inmobiliaria-login/";
+      window.location.href = "index.html"; // redirige si NO ha iniciado sesión
     }
 
-    // Función para cerrar sesión y redirigir al login
+    // 🔓 Cerrar sesión
     function logout() {
       localStorage.removeItem("acceso");
-      window.location.href = "https://sergilozada.github.io/inmobiliaria-login/";
+      window.location.href = "index.html"; // regresa al login
     }
   </script>
 
