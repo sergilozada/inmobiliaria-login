@@ -1,31 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Panel Privado</title>
+  <title>Panel Privado - Asesores</title>
   <style>
-    body { font-family: Arial; padding: 50px; text-align: center; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .terrenos {
+      margin-top: 30px;
+    }
+    .terrenos a {
+      display: block;
+      margin: 10px;
+      font-size: 18px;
+      color: #2980b9;
+      text-decoration: none;
+    }
+    .terrenos a:hover {
+      text-decoration: underline;
+    }
+    button {
+      margin-top: 40px;
+      padding: 10px 20px;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #c0392b;
+    }
   </style>
 </head>
 <body>
 
-  <h1>Panel privado de asesores</h1>
-  <p>Información de los terrenos:</p>
-  <ul>
-    <li><a href="https://tusitio.com/terreno1.pdf" target="_blank">Terreno 1</a></li>
-    <li><a href="https://tusitio.com/terreno2.pdf" target="_blank">Terreno 2</a></li>
-  </ul>
+  <h1>Bienvenido al Panel de Asesores</h1>
+
+  <p>Accede a la información de terrenos disponibles:</p>
+
+  <div class="terrenos">
+    <a href="https://tusitio.com/lotes-playa.pdf" target="_blank">📄 Terrenos - Zona Playa</a>
+    <a href="https://tusitio.com/lotes-campo.pdf" target="_blank">📄 Terrenos - Zona Campo</a>
+    <a href="https://wa.me/51987654321?text=Hola%20quiero%20más%20info%20de%20los%20lotes" target="_blank">📲 Contactar por WhatsApp</a>
+  </div>
 
   <button onclick="logout()">Cerrar sesión</button>
 
   <script>
+    // Validación: si no ha iniciado sesión, redirigir
     if (localStorage.getItem("acceso") !== "ok") {
-      window.location.href = "login.html";
+      window.location.href = "https://sergilozada.github.io/inmobiliaria-login/";
     }
 
+    // Función para cerrar sesión y redirigir al login
     function logout() {
       localStorage.removeItem("acceso");
-      window.location.href = "login.html";
+      window.location.href = "https://sergilozada.github.io/inmobiliaria-login/";
     }
   </script>
+
 </body>
 </html>
