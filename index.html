@@ -1,86 +1,86 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Login de Asesores</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Firebase SDK (compatibilidad clásica) -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iniciar Sesión - Asesores</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      height: 100vh;
       background: linear-gradient(to right, #2980b9, #6dd5fa);
       display: flex;
-      align-items: center;
       justify-content: center;
-      height: 100vh;
+      align-items: center;
     }
 
-    .login-container {
-      background-color: white;
-      padding: 40px 30px;
+    .login-box {
+      background: white;
+      padding: 40px;
       border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      text-align: center;
-      max-width: 400px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
       width: 100%;
+      max-width: 400px;
+      box-sizing: border-box;
     }
 
-    .login-container h1 {
-      margin-bottom: 25px;
+    h2 {
+      margin-bottom: 30px;
       color: #2c3e50;
+      text-align: center;
     }
 
-    .login-container input {
+    input {
       width: 100%;
       padding: 12px;
       margin: 10px 0;
       border: 1px solid #ccc;
-      border-radius: 5px;
+      border-radius: 6px;
+      box-sizing: border-box;
       font-size: 16px;
-      text-align: center; /* Texto centrado al escribir */
+      text-align: center;
     }
 
-    input::placeholder {
-      text-align: center; /* Placeholder centrado */
-    }
-
-    .login-container button {
+    button {
+      width: 100%;
+      padding: 12px;
       background-color: #3498db;
       color: white;
       border: none;
-      padding: 12px;
-      width: 100%;
-      border-radius: 5px;
+      border-radius: 6px;
       font-size: 16px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      margin-top: 15px;
     }
 
-    .login-container button:hover {
+    button:hover {
       background-color: #2980b9;
     }
 
-    .error {
-      color: red;
+    #mensaje {
       margin-top: 10px;
+      color: red;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
 
-  <div class="login-container">
-    <h1>Iniciar Sesión</h1>
-    <input type="text" id="email" placeholder="Correo electrónico">
-    <input type="password" id="password" placeholder="Contraseña">
+  <div class="login-box">
+    <h2>Iniciar Sesión</h2>
+    <input type="email" id="email" placeholder="Correo electrónico" />
+    <input type="password" id="password" placeholder="Contraseña" />
     <button onclick="login()">Ingresar</button>
-    <p class="error" id="mensaje"></p>
+    <p id="mensaje"></p>
   </div>
 
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
   <script>
-    // Configuración de Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyCxtdDswO9Ua7raxrKDOuFHt0_l2aILofQ",
       authDomain: "inmobiliariaaccesos.firebaseapp.com",
@@ -103,6 +103,11 @@
       const email = document.getElementById("email").value.trim();
       const pass = document.getElementById("password").value.trim();
       const correoFormato = convertirCorreo(email);
+
+      if (!email || !pass) {
+        document.getElementById("mensaje").innerText = "Completa todos los campos.";
+        return;
+      }
 
       db.ref("usuarios/" + correoFormato).once("value", (snapshot) => {
         if (!snapshot.exists()) {
